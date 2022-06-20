@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var account_controller = require("../controllers/accountController");
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -37,9 +39,7 @@ router.get("/signup", function(req, res, next){
 });
 
 // on signing up
-router.post("/signup", function(req, res, next){
-  res.render("signup", {  })
-});
+router.post("/signup", account_controller.signup_post);
 
 
 module.exports = router;

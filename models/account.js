@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var AccountSchema = new Schema(
     {
-        email: {type: mongoose.SchemaTypes.Email, required: true, correctTld: true},
+        email: {type: String, required: true, correctTld: true},
         username: {type: String, required: true},
         password: {type: String, required: true},
         member: {type: Boolean, required: true},
