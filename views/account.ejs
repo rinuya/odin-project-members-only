@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Account</title>
   <link rel="stylesheet" href="../stylesheets/style.css">
-  <title>Home</title>
-
 </head>
 <body class="flex flex-col items-center">
   <!-- Navbar -->
@@ -28,31 +27,6 @@
       </ul>
     </div>
   </nav>
-<div class="flex flex-col max-w-5xl">
-  <!-- Optional login -->
-  <div>
-    <p class="text-base mt-10 p-10">It seems like you are not logged in. <a class="text-base text-blue-700" href="signin">Login</a> or <a class="text-base text-blue-700" href="/signup">create</a> an account to view this content!</p>
-  </div>
-  <!-- Content, Display with author if user is verfied, otherwise just the message -->
-  <div id="posts">
-    <div class="flex flex-col ml-10">
-      <div class="max-w-lg bg-blue-100 p-3 rounded-xl">
-        <h4 class="text-xl">Heading example</h4>
-        <p class="mt-1"> This is supposed to be content!!! Yes yes</p>
-        <p class="text-sm mt-1">by Author at Time </p>
-      </div>
-    </div>
-  </div>
-  <!-- Create post -->
-  <h3 class="text-lg mt-10 ml-20">Add a message:</h3>
-  <form class="flex flex-col ml-10 max-w-lg" method="POST" action="/">
-    <label class="mt-1" for="title">Title</label>
-    <input class="mt-1 p-2 bg-gray-100"type="text" name="title" id="title" maxlength="50" placeholder="Title">
-    <label for="message" class="mt-5">Message</label>
-    <textarea class="mt-1 p-2 h-36 bg-gray-100" type="text" placeholder="Message" name="message" id="message"></textarea>
-    <input class="hidden" type="text" value="USER.id">
-    <button type="submit" class="text-white font-semibold bg-blue-500 px-6 py-3 self-end rounded-xl m-2 hover:bg-blue-600">Submit</button>
-  </form>
-</div>
+  <p>Your user settings</p>
 </body>
 </html>
