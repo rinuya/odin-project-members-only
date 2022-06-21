@@ -546,11 +546,17 @@ video {
     max-width: 1536px;
   }
 }
+.absolute {
+  position: absolute;
+}
 .relative {
   position: relative;
 }
 .m-2 {
   margin: 0.5rem;
+}
+.m-1 {
+  margin: 0.25rem;
 }
 .mt-4 {
   margin-top: 1rem;
@@ -572,6 +578,9 @@ video {
 }
 .mt-3 {
   margin-top: 0.75rem;
+}
+.ml-56 {
+  margin-left: 14rem;
 }
 .block {
   display: block;
@@ -721,6 +730,10 @@ video {
 .text-blue-700 {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;

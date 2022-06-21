@@ -35,7 +35,7 @@ router.post("/signin", function(req, res, next){
 
 // get sign up page
 router.get("/signup", function(req, res, next){
-  res.render("signup", {  })
+  res.render("signup", { customerr: "", customerrarray: [], account: "" })
 });
 
 // on signing up

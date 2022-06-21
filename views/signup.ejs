@@ -15,7 +15,7 @@
       </a>
       <ul class="flex mt-4 md:space-x-8 md:mt-0 md:text-lg md:font-medium items-center">
         <li>
-          <a href="/" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Homepage</a>
+          <a href="/" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded" aria-current="page">Homepage</a>
         </li>
         <!-- My account displayed if logged in, otherwise the login thingy -->
         <li>
@@ -31,16 +31,44 @@
   <div>
     <form action="/signup" method="POST" class="flex flex-col ml-10 max-w-lg">
       <label for="username" class="mt-3">Username:</label>
-      <input type="text" name="username" id="username" class="rounded-l mt-1 p-2 bg-gray-100">
+      <% if (account) {%>
+        <input type="text" name="username" id="username" class="rounded-l mt-1 p-2 bg-gray-100" value=<%=account.username %>>
+      <% } else { %>
+        <input type="text" name="username" id="username" class="rounded-l mt-1 p-2 bg-gray-100">
+      <%} %>
+
       <label for="email" class="mt-3">E-Mail:</label>
-      <input type="email" name="email" id="email" class=" rounded-lmt-1 p-2 bg-gray-100">
+      <% if (account) {%>
+        <input type="email" name="email" id="email" class=" rounded-lmt-1 p-2 bg-gray-100" value=<%=account.email %>>
+      <% } else { %>
+        <input type="email" name="email" id="email" class=" rounded-lmt-1 p-2 bg-gray-100">
+      <%} %>
+
       <label for="password" class="mt-3">Password:</label>
       <p class="text-xs text-gray-700">(Password needs to have at least 8 characters)</p>
       <input type="password" name="password" id="password" class=" rounded-lmt-1 p-2 bg-gray-100">
       <label for="confirmpassword" class="mt-3">Confirm Password:</label>
       <input type="password" name="confirmpassword" id="confirmpassword" class="rounded-l mt-1 p-2 bg-gray-100">
-      <!-- If ERROR, it would go above button maybe -->
+      
+      <!-- If ERROR, it would go above button -->
+      <% if (customerr) {%>
+      <div>
+        <p class="absolute m-1 text-red-500"><%=customerr %></p>
+      </div>
+      <%} %>
+
+      <% if (customerrarray.length>0) {%>
+        <div>
+        <% for (var i = 0; i < customerrarray.length; i++) { %>
+          <div class="py-3">
+            <p class="absolute m-1 text-red-500"><%=customerrarray[i].msg %></p>
+          </div>
+        <% } %>
+        </div>
+      <%} %>
+      
       <button type="submit" class="text-white font-semibold bg-blue-500 px-6 py-3 rounded-xl m-2 mt-10 hover:bg-blue-600">Create Account</button>
+      <p class="text-sm text-gray-700 ml-56 px-6">or <a href="/signin">login here</a></p>
     </form>
   </div>
 </body>
