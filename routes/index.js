@@ -1,6 +1,7 @@
+const { Router } = require('express');
 var express = require('express');
 var router = express.Router();
-
+const passport = require('passport');
 var account_controller = require("../controllers/accountController");
 
 /* GET home page. */
@@ -25,21 +26,33 @@ router.post("/account/:id", function(req, res, next){
 
 // get sign in page
 router.get("/signin", function(req, res, next){
-  res.render("signin", {  })
+  res.render("signin", { customerr: "", customerrarray: [] })
 });
 
-// on signing in
-router.post("/signin", function(req, res, next){
-  res.render("signin", {  })
-});
+router.post("/signin",   
+passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/signin"
+})
+) 
 
 // get sign up page
 router.get("/signup", function(req, res, next){
   res.render("signup", { customerr: "", customerrarray: [], account: "" })
 });
 
-// on signing up
+// post sign up 
 router.post("/signup", account_controller.signup_post);
+
+// logging out
+router.get("/logout", (req, res)=>{
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+})
 
 
 module.exports = router;

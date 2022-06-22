@@ -7,6 +7,8 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 
+
+
 exports.signup_post = [
     
     body("username", "Username must not be empty and longer than 3 characters!").trim().isLength({min: 3}).escape(),
@@ -68,3 +70,28 @@ exports.signup_post = [
         } 
     }
 ]
+
+// exports.signin_post = [
+//     body("email", "Email must be valid!").trim().isLength({min: 1}).escape(),
+//     body("password", "Incorrect password!").trim().isLength({min: 8}).escape(),
+
+//     async (req, res, next)=>{
+//         console.log("Got through the body verification");
+//         const errors = validationResult(req);
+        
+//         if (!errors.isEmpty()){
+//             // There are erros. Render the form again with errors displayed
+//             res.render("signin", { customerr: "", customerrarray: errors.array() });
+//             return;
+//         }
+//         // var usernameExists = await Account.exists({email: req.body.email});
+//         // if (!usernameExists) {
+//         //     console.log("User doesn't exist");
+//         //     res.render("signin", {customerr: "User doesn't exist or e-mail wrong!", customerrarray: []})
+//         //     return;
+//         // }
+//         next();
+//     }
+    
+// ]
+

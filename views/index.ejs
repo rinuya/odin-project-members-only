@@ -25,12 +25,16 @@
           <a href="/signin" class="block py-2 pr-4 pl-3 text-gray-700  border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Login</a>
           <a href="/signup" class="text-sm block py-2 pr-4 pl-3 text-gray-700 border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">or register</a>
         </li>
+        <li>
+          <a href="/" class="block py-2 pr-4 pl-3 text-gray-700  border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Logout</a>
+        </li>
       </ul>
     </div>
   </nav>
 <div class="flex flex-col max-w-5xl">
   <!-- Optional login -->
   <div>
+    <p><%=currentUser %></p>
     <p class="text-base mt-10 p-10">It seems like you are not logged in. <a class="text-base text-blue-700" href="signin">Login</a> or <a class="text-base text-blue-700" href="/signup">create</a> an account to view this content!</p>
   </div>
   <!-- Content, Display with author if user is verfied, otherwise just the message -->
