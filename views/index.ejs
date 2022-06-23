@@ -34,7 +34,10 @@
 <div class="flex flex-col max-w-5xl">
   <!-- Optional login -->
   <div>
-    <p><%=currentUser %></p>
+    
+    <% if (user) {%>
+      <h1>WELCOME BACK <%= user %></h1>
+    <% } %>
     <p class="text-base mt-10 p-10">It seems like you are not logged in. <a class="text-base text-blue-700" href="signin">Login</a> or <a class="text-base text-blue-700" href="/signup">create</a> an account to view this content!</p>
   </div>
   <!-- Content, Display with author if user is verfied, otherwise just the message -->

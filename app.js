@@ -33,6 +33,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(function(req, res, next) {
+  console.log(req.user);
+  next();
+})
 // currentUser variable is now available 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
@@ -53,7 +57,7 @@ passport.use(
         console.log("User not found");
         return done(null, false, { message: "Incorrect username" });
       }
-      //compare the typed in password hash to the hash stored in the db
+      //compare the typed in password hash to the hash stored in the db with the salt
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
           console.log("Logging in");
@@ -79,12 +83,13 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+
 // loggin in
 app.post(
   "/signin",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/"
+    failureRedirect: "/signin"
   })
 );
 

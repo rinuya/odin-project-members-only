@@ -14,7 +14,7 @@ var AccountSchema = new Schema(
 AccountSchema
 .virtual("url")
 .get(function(){
-    return "/account/" + this._id;
+    return "/account/" + this.username;
 });
 
 module.exports = mongoose.model ("Account", AccountSchema);
