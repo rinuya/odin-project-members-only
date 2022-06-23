@@ -7,7 +7,7 @@ var account_controller = require("../controllers/accountController");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { user: req.user });
+  res.render('index');
 });
 
 //on create blog post

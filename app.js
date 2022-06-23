@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
-var Account = require("./models/account");
+const Account = require("./models/account");
 const bcrypt = require("bcryptjs");
 
 var indexRouter = require('./routes/index');
@@ -33,38 +33,38 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(function(req, res, next) {
-  console.log(req.user);
-  next();
-})
-// currentUser variable is now available 
+// currentUser should be variable available now 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
 
 //Authentication
+
+//Cannot use email here by default. LocalStrategy expects it to be the username. Based on a Stack Overflow answer:
+// https://stackoverflow.com/questions/18138992/use-email-with-passport-local-previous-help-not-working
+//
+// It seems to me you just changed the name of the argument in the LocalStrategy callback to "email". Passport doesn't automagically know that the field is named email though, you have to tell it.
+//
+// By default, LocalStrategy expects to find credentials in parameters named username and password. If your site prefers to name these fields differently, options are available to change the defaults.
+
 passport.use(
-  new LocalStrategy((email, password, done) => {
+  new LocalStrategy((username, password, done) => {
     //Find the user in the database that matches the username, and call the function that will store the user Object in the result
-    Account.findOne({ email: email }, (err, user) => {
+    Account.findOne({ username: username }, (err, user) => {
       if (err) { 
         console.log("There has been an error");
         return done(err);
       }
-      //if theres no user, he typed the user in incorrectly
       if (!user) {
         console.log("User not found");
         return done(null, false, { message: "Incorrect username" });
       }
-      //compare the typed in password hash to the hash stored in the db with the salt
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
           console.log("Logging in");
-          // passwords match! log user in
           return done(null, user)
         } else {
-          // passwords do not match!
           console.log("Wrong password");
           return done(null, false, { message: "Incorrect password!" })
         }
@@ -83,6 +83,10 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+app.post("/signin", (req, res, next)=>{
+    console.log(req.body.email);
+    next();
+  });
 
 // loggin in
 app.post(
@@ -92,6 +96,7 @@ app.post(
     failureRedirect: "/signin"
   })
 );
+
 
 // logging out
 app.get("/logout", (req, res)=>{
