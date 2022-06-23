@@ -78,6 +78,25 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+
+// loggin in
+app.post(
+  "/signin",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/"
+  })
+);
+
+// logging out
+app.get("/logout", (req, res)=>{
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+})
 //Authentication part finished
 
 app.use(logger('dev'));
@@ -88,14 +107,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-
-app.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/"
-  })
-);
 
 
 // catch 404 and forward to error handler

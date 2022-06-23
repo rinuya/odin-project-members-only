@@ -4,6 +4,7 @@ var router = express.Router();
 const passport = require('passport');
 var account_controller = require("../controllers/accountController");
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -34,7 +35,7 @@ passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/signin"
 })
-) 
+); 
 
 // get sign up page
 router.get("/signup", function(req, res, next){
@@ -44,15 +45,7 @@ router.get("/signup", function(req, res, next){
 // post sign up 
 router.post("/signup", account_controller.signup_post);
 
-// logging out
-router.get("/logout", (req, res)=>{
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-})
+
 
 
 module.exports = router;
