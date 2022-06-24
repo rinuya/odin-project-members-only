@@ -15,7 +15,7 @@
       </a>
       <ul class="flex mt-4 md:space-x-8 md:mt-0 md:text-lg md:font-medium items-center">
         <li>
-          <a href="/" class=" bg-transparent text-blue-700 p-0 dark:text-white" aria-current="page">Homepage</a>
+          <a href="/" class=" bg-transparent text-gray-700 p-0 dark:text-white md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Homepage</a>
         </li>
         <!-- My account displayed if logged in, otherwise the login thingy -->
         <% if (currentUser) {%>
@@ -25,19 +25,21 @@
         <% } %>
         <% if (!currentUser) {%>
           <li class="relative md:top-2.5">
-            <a href="/signin" class="block py-2 pr-4 pl-3 text-gray-700  border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Login</a>
-            <a href="/signup" class="text-sm block py-2 pr-4 pl-3 text-gray-700 border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">or register</a>
+            <a href="/signin" class=" block py-2 pr-4 pl-3 text-gray-700  border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Login</a>
+            <a href="/signup" class="text-sm block py-2 pr-4 pl-3 text-blue-700 border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">or register</a>
           </li>
         <% } %>
         <% if (currentUser) {%>
           <li>
-            <a href="/logout" class="block py-2 pr-4 pl-3 text-gray-700  border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Logout</a>
+            <a href="/logout" class="block py-2 pr-4 pl-3 text-gray-700 border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Logout</a>
           </li>
         <% } %>
       </ul>
     </div>
   </nav>
-  <div>
+  <div class="flex flex-col items-center my-10">
+    <p class="p-4 max-w-xl font-light text-gray-600">Create a user to be able to chat with others on the message board, as well as see your total amount of posts and much more!</p>
+ 
     <form action="/signup" method="POST" class="flex flex-col ml-10 max-w-lg">
       <label for="username" class="mt-3">Username:</label>
       <% if (account) {%>
@@ -48,16 +50,16 @@
 
       <label for="email" class="mt-3">E-Mail:</label>
       <% if (account) {%>
-        <input type="email" name="email" id="email" class=" rounded-lmt-1 p-2 bg-gray-100" value=<%=account.email %>>
+        <input type="email" name="email" id="email" class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value=<%=account.email %>>
       <% } else { %>
-        <input type="email" name="email" id="email" class=" rounded-lmt-1 p-2 bg-gray-100">
+        <input type="email" name="email" id="email" class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
       <%} %>
 
       <label for="password" class="mt-3">Password:</label>
       <p class="text-xs text-gray-700">(Password needs to have at least 8 characters)</p>
-      <input type="password" name="password" id="password" class=" rounded-lmt-1 p-2 bg-gray-100">
+      <input type="password" name="password" id="password" class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
       <label for="confirmpassword" class="mt-3">Confirm Password:</label>
-      <input type="password" name="confirmpassword" id="confirmpassword" class="rounded-l mt-1 p-2 bg-gray-100">
+      <input type="password" name="confirmpassword" id="confirmpassword" class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
       
       <!-- If ERROR, it would go above button -->
       <% if (customerr) {%>
