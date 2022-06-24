@@ -16,12 +16,12 @@ router.post('/', function(req, res, next) {
 });
 
 // get account page
-router.get("/account/:id", function(req, res, next){
+router.get("/account/", function(req, res, next){
   res.render("account", {  })
 });
 
 // submit secret password
-router.post("/account/:id", function(req, res, next){
+router.post("/account/", function(req, res, next){
   res.render("account", {})
 });
 
