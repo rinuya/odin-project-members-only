@@ -14,14 +14,12 @@ router.get("/", function(req, res, next) {
 router.post('/', post_controller.create_post);
 
 // get account page
-router.get("/account/", function(req, res, next){
+router.get("/account", function(req, res, next){
   res.render("account", {  })
 });
 
 // submit secret password
-router.post("/account/", function(req, res, next){
-  res.render("account", {})
-});
+router.post("/account", account_controller.secret_password);
 
 // get sign in page
 router.get("/signin", function(req, res, next){

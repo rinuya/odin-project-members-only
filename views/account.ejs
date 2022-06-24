@@ -46,7 +46,7 @@
       <p class="text-gray-800 dark:text-white text-xl font-medium my-2">
           <%= currentUser.username %>
       </p>
-        <% if (currentUser.member) {%>
+        <% if (currentUser && currentUser.member) {%>
           <p class="text-xs p-2 bg-blue-500 text-white px-4 rounded-full">
             <span>Member</span>
           </p>
@@ -68,19 +68,21 @@
       </div>
   </div>
 </div>
+<% if (currentUser && !currentUser.member) {%>
   <p class="self-center max-w-2xl my-10 text-gray-700">
     If you want to know who wrote which blogpost, verify yourself as a part of this club. The password should never be shared to the public, it's a secret club after all. If you know it, consider yourself one of the lucky ones and verify it below!
   </p>
-  <form class="mb-10 self-center flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
+  <form method="POST" action="/account" autocomplete="off" class="mb-10 self-center flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
     <div class=" relative ">
-        <input type="text" id="&quot;form-subscribe-Subscribe" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Super Secret Password"/>
+        <input name ="secretpassword" type="text" class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Super Secret Password"/>
+        <input name="id" class="hidden" value=<%=currentUser._id %>>
         </div>
         <button class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200" type="submit">
             Verify
         </button>
     </form>
 </div>
- 
+<% } %>
   <footer class="bg-white dark:bg-gray-800 w-full py-8">
     <div class="max-w-screen-xl mx-auto px-4">
         <ul class="max-w-screen-md mx-auto text-lg font-light flex flex-wrap justify-between">

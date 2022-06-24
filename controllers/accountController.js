@@ -2,7 +2,7 @@ var Account = require("../models/account")
 var async = require('async');
 const { body,validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
-
+require('dotenv').config();
 
 exports.signup_post = [
     
@@ -63,4 +63,38 @@ exports.signup_post = [
             })
         } 
     }
+]
+
+exports.secret_password = [
+    body("secretpassword").trim().escape(),
+    async (req, res, next)=>{
+
+        const errors = validationResult(req);
+        
+        if (!errors.isEmpty()) {
+            res.redirect("/account"); 
+        }
+
+        var pw = process.env.VERIFICATION_PASSWORD;
+
+        if (req.body.secretpassword === pw) {
+            console.log("Should update member now")
+
+            const update = await Account.updateOne({_id: req.body.id}, {member: true});
+            if (update){
+                console.log("update went smoothly")
+                res.redirect("/");
+            } else {
+                console.log("update did not go smoothly! somethign went wrong?")
+                res.redirect("/account");
+            }
+        }
+        else {
+            console.log("Secret Password wrong")
+            res.redirect("/account");
+        }
+        
+    }
+    
+
 ]
