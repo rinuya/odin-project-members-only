@@ -93,8 +93,5 @@ exports.secret_password = [
             console.log("Secret Password wrong")
             res.redirect("/account");
         }
-        
     }
-    
-
 ]
