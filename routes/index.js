@@ -3,17 +3,15 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport');
 var account_controller = require("../controllers/accountController");
-
+var post_controller = require("../controllers/postsController");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get("/", function(req, res, next) {
   res.render('index');
 });
 
 //on create blog post
-router.post('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.post('/', post_controller.create_post);
 
 // get account page
 router.get("/account/", function(req, res, next){

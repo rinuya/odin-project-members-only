@@ -4,7 +4,6 @@ const { body,validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
 
 
-
 exports.signup_post = [
     
     body("username", "Username must not be empty and longer than 3 characters!").trim().isLength({min: 3}).escape(),
@@ -13,7 +12,6 @@ exports.signup_post = [
     body("confirmpassword", "You need to confirm the password!").trim().isLength({min: 1}).escape(),
 
     async (req, res, next)=>{
-        console.log("Got through the body verification");
         const errors = validationResult(req);
         // Creating account without password to fill it in the form in case of error
         var account = new Account({
