@@ -40,7 +40,7 @@
 
 <div class="flex flex-col h-screen">
   <!-- Optional login -->
-  <div class="mt-10 self-center">
+  <div class="mt-10 mb-5 self-center">
     
     <% if (currentUser) {%>
       <div class="container flex items-center text-blue-700 text-xl font-bold px-4 py-3 relative" role="alert">
@@ -54,6 +54,61 @@
   </div>
   <!-- Content, Display with author if user is verfied, otherwise just the message -->
   <!-- PUT A DASHBOARD HERE WITH TOTAL AMOUNT OF POSTS; TOTAL AMOUNT OF USERS VERIFIED AND TOTAL AMOUNT OF OWN POSTS MADE -->
+  <div CLASS="flex flex-wrap justify-center gap-5">
+    <div class="shadow-lg rounded-2xl w-36 p-4 bg-white dark:bg-gray-800">
+      <div class="flex items-center">
+          <p class="text-md text-gray-700 dark:text-gray-50 ml-2">
+              Total Posts
+          </p>
+      </div>
+      <div class="flex flex-col justify-start">
+          <p class="text-gray-800 text-4xl text-left dark:text-white font-bold my-4">
+             <%=post_amount %>
+          </p>
+          <div class="relative w-28 h-2 bg-gray-200 rounded">
+              <div class="absolute top-0 h-2  left-0 rounded bg-blue-500 w-2/3">
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <% if (currentUser && currentUser.member) {%>
+    <div class="shadow-lg rounded-2xl w-36 p-4 bg-white dark:bg-gray-800">
+      <div class="flex items-center">
+          <p class="text-md text-gray-700 dark:text-gray-50 ml-2">
+             Your Posts
+          </p>
+      </div>
+      <div class="flex flex-col justify-start">
+          <p class="text-gray-800 text-4xl text-left dark:text-white font-bold my-4">
+            <%=post_by_user %>
+          </p>
+          <div class="relative w-28 h-2 bg-gray-200 rounded">
+              <div class="absolute top-0 h-2  left-0 rounded bg-purple-500 w-2/3">
+              </div>
+          </div>
+      </div>
+    </div>
+    <%} %>
+    <div class="shadow-lg rounded-2xl w-content p-4 bg-white dark:bg-gray-800">
+      <div class="flex items-center">
+          <p class="text-md text-gray-700 dark:text-gray-50 ml-2">
+              Total Members
+          </p>
+      </div>
+      <div class="flex flex-col justify-start">
+          <p class="text-gray-800 text-4xl text-left dark:text-white font-bold my-4">
+            <%=total_members %>
+          </p>
+          <div class="relative w-28 h-2 bg-gray-200 rounded">
+              <div class="absolute top-0 h-2  left-0 rounded bg-blue-500 w-2/3">
+              </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
   
   
   <div id="posts" class="mt-10">

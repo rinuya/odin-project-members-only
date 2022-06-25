@@ -1,4 +1,5 @@
-var Account = require("../models/account")
+var Account = require("../models/account");
+var Post = require("../models/post")
 var async = require('async');
 const { body,validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
@@ -95,3 +96,13 @@ exports.secret_password = [
         }
     }
 ]
+
+
+exports.account_posts = function (req, res, next) {
+
+    Post.countDocuments({author: req.user._id}).exec(function (err, amount){
+        if (err) { return next(err); }
+        res.render("account", { post_amount: amount })
+    })
+
+}

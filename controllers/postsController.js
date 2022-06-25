@@ -2,6 +2,7 @@ var Post = require("../models/post")
 var async = require('async');
 const { body,validationResult } = require('express-validator');
 const { DateTime } = require("luxon");
+var Account = require("../models/account")
 
 
 exports.create_post = [
@@ -33,17 +34,30 @@ exports.create_post = [
     }
 ]
 
-exports.get_post_list = function (req, res, next) {
-
-    Post.find({})
-    .sort({date: 1})
-    .populate("author")
-    .exec(function (err, post_list){
-        if (err) { return next(err); }
-        //Success, so render
-        res.render("index", { posts: post_list})
-    })
-
+exports.get_post_list = async function (req, res, next) {
+    if (req.user){
+        var post_by_user = await Post.countDocuments({author: req.user._id})
+    }
+    else{
+        var post_by_user = 0;
+    }
+    async.parallel({
+        post_list: function(callback){
+            Post
+                .find({})
+                .sort({date: 1})
+                .populate("author")
+                .exec(callback);
+        },
+        post_amount: function (callback) {
+            Post.countDocuments({}, callback)
+        },
+        total_members: function (callback) {
+            Account.countDocuments({member: true}, callback)
+        },
+    }, function(err, results){
+        res.render("index", { posts: results.post_list, post_amount: results.post_amount, post_by_user: post_by_user, total_members: results.total_members})
+    });
 }
 
 exports.delete_post = function ( req, res, next){

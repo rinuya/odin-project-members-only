@@ -15,9 +15,7 @@ router.post('/', post_controller.create_post);
 router.post("/deletepost", post_controller.delete_post)
 
 // get account page
-router.get("/account", function(req, res, next){
-  res.render("account", {  })
-});
+router.get("/account", account_controller.account_posts);
 
 // submit secret password
 router.post("/account", account_controller.secret_password);
