@@ -33,3 +33,15 @@ exports.create_post = [
     }
 ]
 
+exports.get_post_list = function (req, res, next) {
+
+    Post.find({})
+    .sort({date: 1})
+    .populate("author")
+    .exec(function (err, post_list){
+        if (err) { return next(err); }
+        //Success, so render
+        res.render("index", { posts: post_list})
+    })
+
+}

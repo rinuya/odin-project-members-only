@@ -6,9 +6,7 @@ var account_controller = require("../controllers/accountController");
 var post_controller = require("../controllers/postsController");
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-  res.render('index');
-});
+router.get("/", post_controller.get_post_list);
 
 //on create blog post
 router.post('/', post_controller.create_post);

@@ -54,6 +54,8 @@
   </div>
   <!-- Content, Display with author if user is verfied, otherwise just the message -->
   <!-- PUT A DASHBOARD HERE WITH TOTAL AMOUNT OF POSTS; TOTAL AMOUNT OF USERS VERIFIED AND TOTAL AMOUNT OF OWN POSTS MADE -->
+  
+  
   <div id="posts" class="mt-10">
     <div class="mx-auto container flex justify-center text-2xl font-bold px-4 py-3">
       <h1>
@@ -61,20 +63,38 @@
       </h1>
     </div>
   <% if (currentUser && currentUser.member) {%>
+    <% posts.forEach( post=> { %>
     <div class="flex flex-col">
-      <div class="max-w-2xl bg-blue-100 p-6 rounded-xl w-[90%] self-center">
-        <h4 class="text-xl">Post.title</h4>
-        <p class="mt-1">Post.content</p>
-        <p class="text-sm mt-1">Post.author & Post.date </p>
+      <div class="flex flex-col max-w-2xl bg-white m-2 p-6 rounded-xl w-[90%] self-center shadow dark:bg-gray-800">
+        <h4 class="text-xl text-blue-900 mb-2">
+          <%=post.title%>
+        </h4>
+        <p class="mt-1 text-gray-700 text-sm">
+          <%=post.content%>
+        </p>
+        <p class="text-sm mt-2 text-gray-700 self-end">
+          by <%=post.author.username%>,
+          <%=post.shortDate%> 
+        </p>
       </div>
     </div>
+    <% }); %>
   <% } else {%>
-    <div class="flex flex-col">
-      <div class="max-w-2xl bg-blue-100 p-6 rounded-xl w-[90%] self-center">
-        <h4 class="text-xl">Post.title</h4>
-        <p class="mt-1">Post.content</p>
+    <% posts.forEach( post=> { %>
+      <div class="flex flex-col">
+        <div class="flex flex-col max-w-2xl bg-white m-2 p-6 rounded-xl w-[90%] self-center shadow dark:bg-gray-800">
+          <h4 class="text-xl text-blue-900 mb-2">
+            <%=post.title%>
+          </h4>
+          <p class="mt-1 text-gray-700 text-sm">
+            <%=post.content%>
+          </p>
+          <p class="text-sm mt-2 text-gray-700 self-end">
+            <%=post.shortDate%> 
+          </p>
+        </div>
       </div>
-    </div>
+      <% }); %>
   <% } %>
   
   </div>
