@@ -15,7 +15,13 @@ const bcrypt = require("bcryptjs");
 
 var indexRouter = require('./routes/index');
 
+//Production imports
+var compression = require('compression');
+var helmet = require('helmet');
+
 var app = express();
+
+app.use(helmet());
 
 //Here is where the database connection should be, NOT MADE BY EXPRESS
 var mongoDB = process.env.DB_KEY;
@@ -23,6 +29,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+app.use(compression()); //Compress all routes
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -53,19 +60,15 @@ passport.use(
     //Find the user in the database that matches the username, and call the function that will store the user Object in the result
     Account.findOne({ username: username }, (err, user) => {
       if (err) { 
-        console.log("There has been an error");
         return done(err);
       }
       if (!user) {
-        console.log("User not found");
         return done(null, false, { message: "Incorrect username" });
       }
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
-          console.log("Logging in");
           return done(null, user)
         } else {
-          console.log("Wrong password");
           return done(null, false, { message: "Incorrect password!" })
         }
       })
@@ -82,11 +85,6 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
-
-app.post("/signin", (req, res, next)=>{
-    console.log(req.body.email);
-    next();
-  });
 
 // loggin in
 app.post(
