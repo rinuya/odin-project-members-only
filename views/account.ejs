@@ -10,7 +10,7 @@
   <nav class="border-gray-200 px-2 pt-5 bg-white pb-10">
     <div class="container flex flex-wrap items-center justify-between">
       <a href="/" class="flex items-center pr-10">
-          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white ml-10">Members Only</span>
+          <span class="text-blue-900 self-center text-2xl font-semibold whitespace-nowrap dark:text-white ml-10">Members Only</span>
       </a>
       <ul class="flex mt-4 md:space-x-8 md:mt-0 md:text-lg md:font-medium items-center">
         <li>
@@ -46,10 +46,14 @@
       <p class="text-gray-800 dark:text-white text-xl font-medium my-2">
           <%= currentUser.username %>
       </p>
-        <% if (currentUser && currentUser.member) {%>
-          <p class="text-xs p-2 bg-blue-500 text-white px-4 rounded-full">
-            <span>Member</span>
+        <% if (currentUser && currentUser.admin) {%>
+          <p class="text-xs p-2 bg-red-500 text-white px-4 rounded-full">
+            <span>Admin</span>
           </p>
+          <%} else if (currentUser && currentUser.member) {%>
+            <p class="text-xs p-2 bg-blue-500 text-white px-4 rounded-full">
+              <span>Member</span>
+            </p>
         <%} else { %>
           <p class="text-xs p-2 bg-pink-500 text-white px-4 rounded-full">
             <span>Non-Member</span>

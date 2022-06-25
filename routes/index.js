@@ -11,6 +11,9 @@ router.get("/", post_controller.get_post_list);
 //on create blog post
 router.post('/', post_controller.create_post);
 
+// on delete blog post
+router.post("/deletepost", post_controller.delete_post)
+
 // get account page
 router.get("/account", function(req, res, next){
   res.render("account", {  })

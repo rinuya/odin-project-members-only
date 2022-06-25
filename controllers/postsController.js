@@ -45,3 +45,11 @@ exports.get_post_list = function (req, res, next) {
     })
 
 }
+
+exports.delete_post = function ( req, res, next){
+
+    Post.findByIdAndDelete(req.body.id, function deletePost(err){
+        if (err) { return next(err); }
+        res.redirect("/");
+    })
+}
